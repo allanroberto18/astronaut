@@ -2,13 +2,19 @@
 
 namespace Tests\Service;
 
-use App\Exception\WeightException;
+use App\Contracts\Repository\AstronautRepositoryInterface;
 use App\Model\Astronaut;
 use App\Service\AstronautService;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class AstronautServiceTest extends TestCase
 {
+    /**
+     * @var MockObject $astronautRepository
+     */
+    private $astronautRepository;
+
     /**
      * @var AstronautService $astronautService
      */
@@ -16,7 +22,10 @@ class AstronautServiceTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->astronautService = new AstronautService();
+        $this->astronautRepository = $this->getMockBuilder(AstronautRepositoryInterface::class)
+            ->getMock();
+
+        $this->astronautService = new AstronautService($this->astronautRepository);
         parent::setUp();
     }
 
@@ -67,6 +76,59 @@ class AstronautServiceTest extends TestCase
         $this->astronautService->launchAstronaut($astronaut);
         $msgExpected = "{$astronaut->getName()} going where no human has gone before.";
         $this->expectOutputString($msgExpected);
+    }
+
+    /**
+     * @test
+     */
+    public function save_withNameAndWeight_ShouldReturnObj(): void
+    {
+        $id = 1;
+        $name = 'Astronaut';
+        $weight = 10.0;
+
+        $astronaut = new Astronaut();
+        $astronaut->setId($id);
+        $astronaut->setName($name);
+        $astronaut->setWeight($weight);
+
+        $this->astronautRepository
+            ->expects($this->once())
+            ->method('saveAstronaut')
+            ->willReturn($astronaut);
+
+        $result = $this->astronautService->save($name, $weight);
+
+        $this->assertEquals($astronaut->getId(), $result->getId());
+    }
+
+    /**
+     * @test
+     */
+    public function getAll_WithNoArguments_ShouldReturnListOfObj(): void
+    {
+        $id = 1;
+        $name = 'Astronaut';
+        $weight = 10.0;
+
+        $astronaut = new Astronaut();
+        $astronaut->setId($id);
+        $astronaut->setName($name);
+        $astronaut->setWeight($weight);
+
+        $this->astronautRepository
+            ->expects($this->once())
+            ->method('getAll')
+            ->willReturn(
+                [
+                    0 => $astronaut
+                ]
+            );
+
+        $result = $this->astronautService->getAll();
+
+        $totalExpected = 1;
+        $this->assertEquals($totalExpected, sizeof($result));
     }
 
     /**

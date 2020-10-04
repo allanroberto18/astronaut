@@ -1,16 +1,31 @@
-Requirements: 
+**Requirements:** 
 - php 7.3
 - phpunit
 - composer
 
-To check question 2 execute the command below on the terminal:
+```
+phpunit
+```
+
+## Question 2
+
+Execute the command below on the terminal:
 
 Classes related: 
 - App\Model\Astronaut
 - App\Service\AstronautService
 - Tests\Service\AstronautServiceTest  
 
-```
-phpunit
-```
+##Question 3
+
+Create nasa table command: ./database/create_table_nasa.sql
+
+Classes related:
+- App\Model\Astronaut
+- App\Provider\ConnectionProvider
+- Tests\Provider\ConnectionProviderTest  
+- App\Repository\AstronautRepository
+- Tests\Repository\AstronautRepositoryTest  
+- App\Service\AstronautService
+- Tests\Service\AstronautServiceTest  
 

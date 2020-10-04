@@ -5,6 +5,11 @@ namespace App\Model;
 class Astronaut
 {
     /**
+     * @var int|null
+     */
+    private $id;
+
+    /**
      * @var string $name
      */
     private $name;
@@ -15,14 +20,19 @@ class Astronaut
     private $weight;
 
     /**
-     * Astronaut constructor.
-     * @param string $name
-     * @param float $weight
+     * @return int|null
      */
-    public function __construct(string $name, float $weight)
+    public function getId(): ?int
     {
-        $this->name = $name;
-        $this->weight = $weight;
+        return $this->id;
+    }
+
+    /**
+     * @param int|null $id
+     */
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
     }
 
     /**
