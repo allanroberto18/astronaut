@@ -18,7 +18,7 @@ phpunit
 
 ##Question 3
 
-Create nasa table command: ./database/create_table_nasa.sql
+Create nasa table command: ./database/question_3_create_table_nasa.sql
 
 **Classes related:**
 - App\Model\Astronaut
@@ -28,6 +28,10 @@ Create nasa table command: ./database/create_table_nasa.sql
 - Tests\Repository\AstronautRepositoryTest  
 - App\Service\AstronautService
 - Tests\Service\AstronautServiceTest  
+
+##Question 4
+
+Create nasa table command: ./database/question_4_create_table_person_course_and_relationships.sql
 
 ##Question 5
 **Classes related:**

@@ -1,48 +1,40 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace App\Repository;
 
-
 use App\Model\Astronaut;
-use App\Contracts\Provider\ConnectionProviderInterface;
+use App\Contracts\Provider\CommandProviderInterface;
 use App\Contracts\Repository\AstronautRepositoryInterface;
 
 class AstronautRepository implements AstronautRepositoryInterface
 {
     /**
-     * @var ConnectionProviderInterface $connectionProvider
+     * @var CommandProviderInterface $commandProvider
      */
-    private $connectionProvider;
+    private $commandProvider;
 
     /**
      * AstronautRepository constructor.
-     * @param ConnectionProviderInterface $connectionProvider
+     * @param CommandProviderInterface $commandProvider
      */
-    public function __construct(ConnectionProviderInterface $connectionProvider)
+    public function __construct(CommandProviderInterface $commandProvider)
     {
-        $this->connectionProvider = $connectionProvider;
+        $this->commandProvider = $commandProvider;
     }
 
     public function saveAstronaut(Astronaut $astronaut): Astronaut
     {
-        $pdo = $this->connectionProvider->getConnection();
-        $pdo->beginTransaction();
-        $stmt = $pdo->prepare('INSERT INTO nasa (name, weight) VALUES (?, ?)');
-        $stmt->execute([$astronaut->getName(), $astronaut->getWeight()]);
-        $pdo->commit();
-
-        $astronaut->setId(intval($pdo->lastInsertId()));
+        $sql = 'INSERT INTO nasa (name, weight) VALUES (?, ?)';
+        $values = [ $astronaut->getName(), $astronaut->getWeight() ];
+        $astronaut->setId($this->commandProvider->getId($sql, $values));
 
         return $astronaut;
     }
 
     public function getAll(): array
     {
-        $pdo = $this->connectionProvider->getConnection();
-        $stmt = $pdo->prepare('SELECT * FROM nasa ORDER BY id ASC');
-        $stmt->execute([]);
-        $data = $stmt->fetchAll();
+        $sql = 'SELECT * FROM nasa ORDER BY id ASC';
+        $data = $this->commandProvider->getAll($sql, []);
         $result = [];
         foreach ($data as $item) {
             $astronaut = new Astronaut();
