@@ -29,9 +29,15 @@ class CommandProvider implements CommandProviderInterface
      */
     public function getAll(string $sql, array $values) :array
     {
-        return $this
+        $data = $this
             ->executeCommand($sql, $values)
             ->fetchAll();
+
+        if (is_bool($data)) {
+            return [];
+        }
+
+        return $data;
     }
 
     /**
@@ -41,9 +47,15 @@ class CommandProvider implements CommandProviderInterface
      */
     public function getById(string $sql, array $values) :array
     {
-        return $this
+        $data = $this
             ->executeCommand($sql, $values)
             ->fetch(\PDO::FETCH_ASSOC);
+
+        if (is_bool($data)) {
+            return [];
+        }
+
+        return $data;
     }
 
     /**
@@ -57,9 +69,10 @@ class CommandProvider implements CommandProviderInterface
         $pdo->beginTransaction();
         $stmt = $pdo->prepare($sql);
         $stmt->execute($values);
+        $id = intval($pdo->lastInsertId());
         $pdo->commit();
 
-        return intval($pdo->lastInsertId());
+        return $id;
     }
 
     /**
