@@ -15,12 +15,21 @@ $courseService = $ioc['CourseService'];
 $course = $courseService->getCourse(intval($id));
 
 $table = '<td colspan="2">Course not found</td>';
+$students = '<td colspan="2">This course doesn\'t have student</td>';
 if ($course !== null) {
     /** @var \App\Model\Course $item */
     $table = '<tr>';
     $table .= '<td>' . $course->getId() . '</td>';
     $table .= '<td>' . $course->getName() . '</td>';
     $table .= '</tr>';
+    if (sizeof($course->getStudents()) > 0) {
+        $students = '<td>Students</td><td>';
+        foreach ($course->getStudents() as $item) {
+            $students .= $item->getName() . '<br />';
+        }
+        $students .= '</td>';
+    }
+    $table .= $students;
 }
 
 ?>

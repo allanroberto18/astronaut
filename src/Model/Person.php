@@ -15,6 +15,19 @@ class Person
     private $name;
 
     /**
+     * @var array $courses
+     */
+    private $courses;
+
+    /**
+     * Person constructor.
+     */
+    public function __construct()
+    {
+        $this->courses = [];
+    }
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -45,5 +58,21 @@ class Person
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCourses(): array
+    {
+        return $this->courses;
+    }
+
+    /**
+     * @param array $courses
+     */
+    public function setCourses(array $courses): void
+    {
+        $this->courses = $courses;
     }
 }

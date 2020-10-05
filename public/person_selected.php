@@ -13,6 +13,7 @@ if ($id === '' || $id === 0 || is_numeric($id) === false) {
 
 $personService = $ioc['PersonService'];
 $person = $personService->getPerson(intval($id));
+$courses = '<td colspan="2">This course doesn\'t have student</td>';
 
 $table = '<td colspan="2">Person not found</td>';
 if ($person !== null) {
@@ -21,6 +22,14 @@ if ($person !== null) {
     $table .= '<td>' . $person->getId() . '</td>';
     $table .= '<td>' . $person->getName() . '</td>';
     $table .= '</tr>';
+    if (sizeof($person->getCourses()) > 0) {
+        $courses = '<td>Courses</td><td>';
+        foreach ($person->getCourses() as $item) {
+            $courses .= $item->getName() . '<br />';
+        }
+        $courses .= '</td>';
+    }
+    $table .= $courses;
 }
 
 ?>
@@ -49,7 +58,6 @@ if ($person !== null) {
         </ol>
     </nav>
     <h3>Person List</h3>
-    <a class="btn btn-primary" href="person_form.php" role="button">New Person</a>
     <table class="table">
         <thead>
         <tr>
@@ -61,6 +69,8 @@ if ($person !== null) {
             <?= $table ?>
         </tbody>
     </table>
+    <a class="btn btn-primary" href="person_form.php" role="button">New Person</a>
+    <a class="btn btn-primary" href="person_form_update.php?id=<?=$person->getId();?>" role="button">Update Person</a>
 </div>
 
 

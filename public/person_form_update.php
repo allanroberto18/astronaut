@@ -1,20 +1,33 @@
 <?php
 
+use App\Model\Person;
+
 require_once 'container.php';
+
+$id = empty($_GET['id']) ? $_POST['id'] : $_GET['id'];
+
+if ($id === '' || $id === 0 || is_numeric($id) === false) {
+    header('Location: /person_list.php');
+}
+
+$personService = $ioc['PersonService'];
+$person = $personService->getPerson(intval($id));
 
 $courseRepository = $ioc['CourseRepository'];
 $courses = $courseRepository->getAll();
 
-$name = '';
-$data = $_REQUEST;
+if ($person === null) {
+    header('Location: /person_form.php');
+}
 
-if (sizeof($data) > 0) {
+$data = $_POST;
+if (empty($_POST) === false) {
     $name = trim($data['name']);
     $courses = $data['courses'];
 
     /** @var \App\Service\PersonService $personService */
     $personService = $ioc['PersonService'];
-    $personService->addPerson($name, $courses);
+    $personService->updatePerson($id, $name, $courses);
 
     header('Location: /person_list.php');
 }
@@ -30,8 +43,7 @@ if (sizeof($data) > 0) {
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-          crossorigin="anonymous">
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <title>Create Person</title>
 </head>
@@ -42,15 +54,16 @@ if (sizeof($data) > 0) {
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item"><a href="person_list.php">Person List</a></li>
-            <li class="breadcrumb-item active" aria-current="page">New Person</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Person: <?= $person->getName() ?> </li>
         </ol>
     </nav>
-    <h3>New Person</h3>
+    <h3>Update Person</h3>
     <form class="needs-validation" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
           novalidate>
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" name="name" required/>
+            <input type="hidden" name="id" value="<?= $person->getId() ?>"/>
+            <input type="text" class="form-control" id="name" name="name" value="<?= $person->getName() ?>" required/>
             <div class="invalid-feedback">
                 Field name is required
             </div>
@@ -60,8 +73,16 @@ if (sizeof($data) > 0) {
             <?php foreach ($courses as $course): ?>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" name="courses[]"
-                           value="<?= $course->getId(); ?>"/>
-                    <label><?= $course->getName(); ?></label>
+                           <?php
+                            foreach ($person->getCourses() as $item) {
+                                if ($item->getId() === $course->getId()) {
+                                    echo 'checked=checked';
+                                }
+                            }
+                           ?>
+                           value="<?= $course->getId() ?>"
+                    />
+                    <label><?= $course->getName() ?></label>
                 </div>
             <?php endforeach; ?>
         </div>

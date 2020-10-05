@@ -15,7 +15,8 @@ foreach ($list as $item) {
     $table .= '<tr>';
     $table .= '<td>' . $item->getId() . '</td>';
     $table .= '<td>' . $item->getName() . '</td>';
-    $table .= '<td><a class="btn btn-sm btn-secondary" href="course_selected.php?id=' . $item->getId() .'" role="button">Check my courses</a></td>';
+    $table .= '<td><a class="btn btn-sm btn-secondary" href="person_selected.php?id=' . $item->getId() .'" role="button">Check Profile</a>';
+    $table .= '<a class="btn btn-sm btn-secondary" href="person_form_update.php?id=' . $item->getId() .'" role="button">Update Profile</a></td>';
     $table .= '</tr>';
 }
 

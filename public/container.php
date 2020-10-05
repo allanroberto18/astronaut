@@ -32,6 +32,12 @@ $ioc['CourseRepository'] = function($c) {
     );
 };
 
+$ioc['PersonCourseRepository'] = function($c) {
+    return new \App\Repository\PersonCourseRepository(
+        $c['CommandProvider']
+    );
+};
+
 $ioc['AstronautService'] = function($c) {
     return new \App\Service\AstronautService(
         $c['AstronautRepository']
@@ -40,12 +46,14 @@ $ioc['AstronautService'] = function($c) {
 
 $ioc['CourseService'] = function($c) {
     return new \App\Service\CourseService(
-        $c['CourseRepository']
+        $c['CourseRepository'],
+        $c['PersonCourseRepository']
     );
 };
 
 $ioc['PersonService'] = function($c) {
     return new \App\Service\PersonService(
-        $c['PersonRepository']
+        $c['PersonRepository'],
+        $c['PersonCourseRepository']
     );
 };

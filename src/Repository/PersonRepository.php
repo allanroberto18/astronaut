@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Contracts\Provider\CommandProviderInterface;
-use App\Contracts\Provider\ConnectionProviderInterface;
 use App\Contracts\Repository\PersonRepositoryInterface;
 use App\Model\Person;
 
@@ -63,5 +62,13 @@ class PersonRepository implements PersonRepositoryInterface
         }
 
         return $person;
+    }
+
+    public function updatePerson(Person $person): void
+    {
+        $sql = 'UPDATE person SET name = ? WHERE id = ?';
+        $values = [ $person->getName(), $person->getId() ];
+
+        $this->commandProvider->executeCommand($sql, $values);
     }
 }

@@ -88,7 +88,7 @@ class PersonRepositoryTest extends TestCase
         $idExpected = 1;
         $personExpected = 'Person 1';
         $sql = 'SELECT * FROM person WHERE id = ?';
-        $values = [ $idExpected ];
+        $values = [$idExpected];
 
         $this->commandProvider
             ->expects($this->once())
@@ -101,5 +101,33 @@ class PersonRepositoryTest extends TestCase
         $this->assertInstanceOf(Person::class, $person);
         $this->assertEquals($idExpected, $person->getId());
         $this->assertEquals($personExpected, $person->getName());
+    }
+
+    /**
+     * @test
+     */
+    public function updatePerson_WithPersonIdNameAndCourses_ShouldReturnPerson(): void
+    {
+        $id = 1;
+        $name = 'Person';
+
+        $person = new Person();
+        $person->setId($id);
+        $person->setName($name);
+
+        $sql = 'UPDATE person SET name = ? WHERE id = ?';
+        $values = [$name, $id];
+
+        $this->commandProvider
+            ->expects($this->once())
+            ->method('executeCommand')
+            ->with($sql, $values)
+            ->willReturn(
+                $this
+                    ->getMockBuilder(\PDOStatement::class)
+                    ->getMock()
+            );
+
+        $this->personRepository->updatePerson($person);
     }
 }

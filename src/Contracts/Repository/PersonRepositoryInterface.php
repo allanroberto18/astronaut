@@ -9,4 +9,5 @@ interface PersonRepositoryInterface
     public function savePerson(Person $person): Person;
     public function getPerson(int $id): ?Person;
     public function getAll(): array;
+    public function updatePerson(Person $person): void;
 }
