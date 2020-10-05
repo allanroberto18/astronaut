@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Contracts\\Provider\\ConnectionProviderInterface' => $baseDir . '/src/Contracts/Provider/ConnectionProviderInterface.php',
     'App\\Contracts\\Repository\\AstronautRepositoryInterface' => $baseDir . '/src/Contracts/Repository/AstronautRepositoryInterface.php',
+    'App\\Helper\\StringFormatHelper' => $baseDir . '/src/Helper/StringFormatHelper.php',
     'App\\Model\\Astronaut' => $baseDir . '/src/Model/Astronaut.php',
     'App\\Provider\\ConnectionProvider' => $baseDir . '/src/Provider/ConnectionProvider.php',
     'App\\Repository\\AstronautRepository' => $baseDir . '/src/Repository/AstronautRepository.php',
@@ -960,7 +961,8 @@ return array(
     'SebastianBergmann\\Type\\VoidType' => $vendorDir . '/sebastian/type/src/VoidType.php',
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'Symfony\\Polyfill\\Ctype\\Ctype' => $vendorDir . '/symfony/polyfill-ctype/Ctype.php',
-    'Tests\\Provider\\PDOProviderTest' => $baseDir . '/tests/Provider/PDOProviderTest.php',
+    'Tests\\Helper\\StringFormatHelperTest' => $baseDir . '/tests/Helper/StringFormatHelperTest.php',
+    'Tests\\Provider\\ConnectionProviderTest' => $baseDir . '/tests/Provider/ConnectionProviderTest.php',
     'Tests\\Repository\\AstronautRepositoryTest' => $baseDir . '/tests/Repository/AstronautRepositoryTest.php',
     'Tests\\Service\\AstronautServiceTest' => $baseDir . '/tests/Service/AstronautServiceTest.php',
     'TheSeer\\Tokenizer\\Exception' => $vendorDir . '/theseer/tokenizer/src/Exception.php',

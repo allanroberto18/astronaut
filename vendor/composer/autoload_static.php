@@ -89,6 +89,7 @@ class ComposerStaticInitb3d73ec4408f312622266a59909928f0
     public static $classMap = array (
         'App\\Contracts\\Provider\\ConnectionProviderInterface' => __DIR__ . '/../..' . '/src/Contracts/Provider/ConnectionProviderInterface.php',
         'App\\Contracts\\Repository\\AstronautRepositoryInterface' => __DIR__ . '/../..' . '/src/Contracts/Repository/AstronautRepositoryInterface.php',
+        'App\\Helper\\StringFormatHelper' => __DIR__ . '/../..' . '/src/Helper/StringFormatHelper.php',
         'App\\Model\\Astronaut' => __DIR__ . '/../..' . '/src/Model/Astronaut.php',
         'App\\Provider\\ConnectionProvider' => __DIR__ . '/../..' . '/src/Provider/ConnectionProvider.php',
         'App\\Repository\\AstronautRepository' => __DIR__ . '/../..' . '/src/Repository/AstronautRepository.php',
@@ -1041,7 +1042,8 @@ class ComposerStaticInitb3d73ec4408f312622266a59909928f0
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'Symfony\\Polyfill\\Ctype\\Ctype' => __DIR__ . '/..' . '/symfony/polyfill-ctype/Ctype.php',
-        'Tests\\Provider\\PDOProviderTest' => __DIR__ . '/../..' . '/tests/Provider/PDOProviderTest.php',
+        'Tests\\Helper\\StringFormatHelperTest' => __DIR__ . '/../..' . '/tests/Helper/StringFormatHelperTest.php',
+        'Tests\\Provider\\ConnectionProviderTest' => __DIR__ . '/../..' . '/tests/Provider/ConnectionProviderTest.php',
         'Tests\\Repository\\AstronautRepositoryTest' => __DIR__ . '/../..' . '/tests/Repository/AstronautRepositoryTest.php',
         'Tests\\Service\\AstronautServiceTest' => __DIR__ . '/../..' . '/tests/Service/AstronautServiceTest.php',
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',
