@@ -26,7 +26,7 @@ php -S localhost:8000 -t public/
 - App\Service\AstronautService
 - Tests\Service\AstronautServiceTest  
 
-##Question 3
+## Question 3
 
 Create nasa table command: ./database/question_3_create_table_nasa.sql
 
@@ -44,7 +44,7 @@ Create nasa table command: ./database/question_3_create_table_nasa.sql
 - public/astronaut_form.php
 - public/astronaut_list.php
 
-##Question 4
+## Question 4
 
 Create nasa table command: ./database/question_4_create_table_person_course_and_relationships.sql
 
@@ -72,12 +72,14 @@ Create nasa table command: ./database/question_4_create_table_person_course_and_
 - public/person_form_update.php
 - public/course_selected.php
 
-##Question 5
+## Question 5
+
 **Classes related:**
 - App\Helper\StringFormatHelper
 - Tests\Helper\StringFormatHelperTest
 
 ## Question 6
+
 To configure github repositories to get dependencies using composer:
 ```
 ## on composer.json
@@ -101,12 +103,14 @@ when the **develop** is in test mode, and bugs are detected, to fix them we can 
 (by default based on develop branch) and prepare the release that will be merged on master and then create a tag release.
 In case to find bugs on the mastere branch will be necessary create **hotfix branch** (based from master branch).  
 
-##Question 7
+## Question 7
+
 Unfortunately the after execute vagrant up, was possible access ssh but I didn't have any web access.
 
 ![Error Image](error.png)
 
 ![Error Image on Debug Mode](error2.png)
 
-##Question 8 
-this value (aXA6MTM5LjI4LjIxOC4xODAgdGltZToyMDIwLTEwLTAzIDIxOjE2OjQy = ip:139.28.218.180 time:2020-10-03 21:16:42) is a base64 encoded information.
+## Question 8
+
+This value (aXA6MTM5LjI4LjIxOC4xODAgdGltZToyMDIwLTEwLTAzIDIxOjE2OjQy = ip:139.28.218.180 time:2020-10-03 21:16:42) is a base64 encoded information.
